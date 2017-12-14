@@ -26,6 +26,8 @@ const common = merge([{
             filename: 'index.html',
             chunks: ['index', 'common'],
             template: PATHS.source + '/index.pug',
+            inject: 'true',
+
         }),
         new webpack.optimize.CommonsChunkPlugin({
             name: 'common'

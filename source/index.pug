@@ -1,0 +1,67 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset='utf-8')
+        title Flat UI
+        script(src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js')
+    body
+        mixin standartButt(text, color, size, shadow)
+            button.standartButt(class="ripple_button"+color+size+shadow)=text
+        mixin arrow_button(color, way)
+            div&attributes(attributes).arrow_button
+                div.arrow_container(class="arrow_button_"+color)
+                    svg(viewbox="0 0 100 100").arrow-svg(class="arrow_button_"+way)
+                        circle(cx="50%" cy="50%" r="47%" stroke-width="6%")
+                        polyline(points="59,29 38,50 59,71" stroke-width="7%")
+        mixin pie-chart(percent)
+            div(class="clearfix")
+                div(class="c100 big p"+percent)
+                    span= percent
+                    div.slice
+                        div.bar
+                        div.fill
+        mixin slider(min, max, output)
+            form(oninput="output.value = Math.round(range.valueAsNumber)")
+                div(class="range")
+                    input(name="range" type="range" min=min max=max)
+                    div(class="range-output")
+                        output(class="output" name="output" for="range")= output        
+        div.blocks
+            article.buttons
+                h1 standard buttons
+                section.standartButts
+                    +standartButt('button', ' turquoise', ' small', ' no-shadow')
+                    +standartButt('button', ' turquoise', ' big', ' no-shadow')
+                    +standartButt('button', ' red', ' big', ' no-shadow')
+                    +standartButt('button', ' red', ' small', ' no-shadow')
+                section.standartButts
+                    +standartButt('button', ' turquoise', ' small', ' shadow-turquoise')
+                    +standartButt('button', ' turquoise', ' big', ' shadow-turquoise')
+                    +standartButt('button', ' red', ' big', ' shadow-turquoise')
+                    +standartButt('button', ' red', ' small', ' shadow-turquoise')
+                section.standartButts
+                    +standartButt('button', ' turquoise', ' small', ' shadow-turquoise')
+                    +standartButt('button', ' turquoise', ' big', ' shadow-turquoise')
+                    +standartButt('button', ' turquoise', ' big', ' shadow-turquoise')
+                    +standartButt('button', ' turquoise', ' small', ' shadow-turquoise')
+            article.arrow_buttons
+                h2.head arrow buttons
+                section.arrow_buttons_body
+                    +arrow_button('salmon1','left')
+                    +arrow_button('salmon1','right')
+                    +arrow_button('grey','left')
+                    +arrow_button('grey','right')
+                    +arrow_button('salmon2','left')
+                    +arrow_button('salmon2','right')
+            article.pie_charts
+                h2.head percentages / pie chart
+                section.pie_charts_body
+                    +pie-chart(0)
+                    +pie-chart(38)
+                    +pie-chart(62)
+                    +pie-chart(89)
+                    canvas(id="donat")
+            article.sliders
+                h2.head sliders
+                section.sliders_body
+                  +slider(0, 100, 50)
